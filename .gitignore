@@ -1,0 +1,41 @@
+# vue
+vue/business/node_modules
+vue/business/.history
+vue/business/.husky
+vue/business/dist
+vue/business/.npmrc
+vue/business/.cache
+
+vue/business/tests/server/static
+vue/business/tests/server/static/upload
+
+vue/business/.local
+## local env files
+vue/business/.env.local
+vue/business/.env.*.local
+vue/business/.eslintcache
+
+## Log files
+vue/business/npm-debug.log*
+vue/business/yarn-debug.log*
+vue/business/yarn-error.log*
+vue/business/pnpm-debug.log*
+
+## Editor directories and files
+vue/business/.idea
+## .vscode
+vue/business/*.suo
+vue/business/*.ntvs*
+vue/business/*.njsproj
+vue/business/*.sln
+vue/business/*.sw?
+
+vue/business/package-lock.json
+vue/business/pnpm-lock.yaml
+
+
+# go
+go/src/gofly_bs/runtime
+go/src/gofly_bs/tmp
+go/src/gofly_bs/resource/config.yaml
+go/src/gofly_bs/resource/website

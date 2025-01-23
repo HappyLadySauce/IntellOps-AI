@@ -1,0 +1,169 @@
+<template>
+  <a-form
+    ref="formRef"
+    :model="form"
+    :rules="rules"
+    :label-col-style="{ display: 'none' }"
+    :wrapper-col-style="{ flex: 1 }"
+    size="large"
+    @submit="handleLogin"
+  >
+    <a-form-item field="mobile" hide-label>
+      <a-input v-model="form.mobile" placeholder="请输入手机号" :max-length="11" allow-clear />
+    </a-form-item>
+    <a-form-item field="captcha" hide-label>
+      <a-input v-model="form.captcha" placeholder="请输入验证码" :max-length="4" allow-clear style="flex: 1 1" />
+      <a-button
+        class="captcha-btn"
+        :loading="captchaLoading"
+        :disabled="captchaDisable"
+        size="large"
+        @click="onCaptcha"
+      >
+        {{ captchaBtnName }}
+      </a-button>
+    </a-form-item>
+    <a-form-item>
+      <a-space direction="vertical" fill class="w-full">
+        <a-button  :disabled="!form.captcha" class="btn" type="primary" :loading="loading" html-type="submit" size="large" long>{{$t('login.form.login')}}</a-button>
+      </a-space>
+    </a-form-item>
+  </a-form>
+</template>
+
+<script setup lang="ts">
+import { ref,reactive,} from 'vue';
+import { type FormInstance, Message } from '@arco-design/web-vue'
+import { useUserStore } from '@/store'
+import { useRouter } from 'vue-router';
+import * as Regexp from '@/utils/regexp'
+import { useI18n } from 'vue-i18n';
+import { getCaptcha } from '@/api/user';
+const { t } = useI18n();
+const formRef = ref<FormInstance>()
+const form = reactive({
+  mobile: '',
+  captcha: ''
+})
+
+const rules: FormInstance['rules'] = {
+  mobile: [
+    { required: true, message: '请输入手机号' },
+    { match: Regexp.Phone, message: '请输入正确的手机号' }
+  ],
+  captcha: [{ required: true, message: '请输入验证码' }]
+}
+
+const userStore = useUserStore()
+const router = useRouter()
+const loading = ref(false)
+// 登录
+const handleLogin = async () => {
+  try {
+    const isInvalid = await formRef.value?.validate()
+    if (isInvalid) return
+    loading.value = true
+    await userStore.login({
+      mobile: form.mobile,
+      captcha: form.captcha,
+    })
+    const { redirect, ...othersQuery } = router.currentRoute.value.query;
+    var toURl=(redirect as string)
+    if(toURl=="notFound"){
+        toURl="home"
+    }
+    router.replace({
+      name: toURl || 'home',
+      query: {
+        ...othersQuery,
+      },
+    });
+    Message.success({content:t('login.form.login.success'),id:"errmsg"})
+  } catch (error) {
+    form.captcha = ''
+  } finally {
+    loading.value = false
+  }
+}
+
+const captchaTimer = ref()
+const captchaTime = ref(60)
+const captchaBtnName = ref('获取验证码')
+const captchaDisable = ref(false)
+// 重置验证码
+const resetCaptcha = () => {
+  window.clearInterval(captchaTimer.value)
+  captchaTime.value = 60
+  captchaBtnName.value = '获取验证码'
+  captchaDisable.value = false
+}
+
+const captchaLoading = ref(false)
+// 获取验证码
+const onCaptcha = async () => {
+  if (captchaLoading.value) return
+  const isInvalid = await formRef.value?.validateField('mobile')
+  if (isInvalid) return
+  try {
+    captchaLoading.value = true
+    captchaBtnName.value = '发送中...'
+    await getCaptcha({
+      type:"mobile",
+      mobile: form.mobile
+    })
+    captchaLoading.value = false
+    captchaDisable.value = true
+    captchaBtnName.value = `获取验证码(${(captchaTime.value -= 1)}s)`
+    // Message.success('短信发送成功')
+    Message.success('仅提供效果演示，实际使用请查看代码取消相关注释')
+    captchaTimer.value = window.setInterval(() => {
+      captchaTime.value -= 1
+      captchaBtnName.value = `获取验证码(${captchaTime.value}s)`
+      if (captchaTime.value <= 0) {
+        resetCaptcha()
+      }
+    }, 1000)
+  } catch (error) {
+    resetCaptcha()
+  } finally {
+    captchaLoading.value = false
+  }
+}
+</script>
+
+<style lang="less" scoped>
+.arco-input-wrapper,
+:deep(.arco-select-view-single) {
+  height: 40px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.arco-input-wrapper.arco-input-error {
+  background-color: rgb(var(--danger-1));
+  border-color: rgb(var(--danger-3));
+}
+.arco-input-wrapper.arco-input-error:hover {
+  background-color: rgb(var(--danger-1));
+  border-color: rgb(var(--danger-6));
+}
+
+.arco-input-wrapper :deep(.arco-input) {
+  font-size: 13px;
+  color: var(--color-text-1);
+}
+.arco-input-wrapper:hover {
+  border-color: rgb(var(--arcoblue-6));
+}
+
+.captcha-btn {
+  height: 40px;
+  margin-left: 12px;
+  min-width: 98px;
+  border-radius: 4px;
+}
+
+.btn {
+  height: 40px;
+}
+</style>

@@ -1,0 +1,106 @@
+import { computed } from 'vue';
+import type { TableColumnData } from '@arco-design/web-vue/es/table/interface';
+export const columns = computed<TableColumnData[]>(() => [
+     {
+       title:  "ID",
+       dataIndex: "id",
+       align:"left",
+       width: 60,
+     },
+     {
+       title:  "标题",
+       dataIndex: "title",
+       align:"left",
+       width: 190,
+     },
+     {
+       title:  "单张图",
+       dataIndex: "image",
+       slotName:  "image",
+       align:"left",
+       width: 80,
+     },
+     {
+       title:  "分类",
+       dataIndex: "cidName",
+       align:"left",
+       width: 100,
+     },
+     {
+       title:  "用户类型",
+       dataIndex: "userType",
+       slotName:  "dic",
+       align:"left",
+       width: 110,
+     },
+     {
+       title:  "多张图",
+       dataIndex: "images",
+       slotName:  "images",
+       align:"left",
+       width: 100,
+     },
+     {
+       title:  "喜欢颜色",
+       dataIndex: "likeColor",
+       slotName:  "color",
+       align:"left",
+       width: 100,
+     },
+     {
+       title:  "记录录音",
+       dataIndex: "record_audio",
+       slotName:  "cellcopy",
+       align:"left",
+       width: 190,
+     },
+     {
+       title:  "价格",
+       dataIndex: "price",
+       align:"left",
+       width: 100,
+     },
+     {
+       title:  "描述",
+       dataIndex: "des",
+       slotName:  "des",
+       align:"left",
+       width: 280,
+     },
+     {
+       title:  "性别",
+       dataIndex: "sex",
+       slotName:  "gender",
+       align:"left",
+       width: 100,
+     },
+     {
+       title:  "出行方式",
+       dataIndex: "workerway",
+       slotName:  "tags",
+       align:"left",
+       width: 180,
+     },
+     {
+       title:  "状态",
+       dataIndex: "status",
+       slotName:  "cellstatus",
+       align:"left",
+       width: 100,
+     },
+     {
+       title:  "更新时间",
+       dataIndex: "updatetime",
+       slotName:  "datetime",
+       align:"left",
+       width: 190,
+     },
+    {
+      title: '操作',
+      dataIndex: 'operations',
+      slotName: 'operations',
+      fixed: 'right',
+      width: 100,
+      align:"center"
+    },
+  ]);

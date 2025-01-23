@@ -1,0 +1,97 @@
+.data-resizer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0px;
+    right: 0;
+    z-index: 1;
+    outline: 2px solid #1890FF;
+    max-width: initial !important;
+}
+.data-resizer img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+}
+.data-resizer-holder {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    background: #1890FF;
+    display: inline-block;
+}
+.data-resizer-holder-right-top {
+    top: -6px;
+    right: -6px;
+    cursor: nesw-resize;
+}
+.data-resizer-holder-right-bottom {
+    bottom: -6px;
+    right: -6px;
+    cursor: nwse-resize;
+}
+.data-resizer-holder-left-bottom {
+    bottom: -6px;
+    left: -6px;
+    cursor: nesw-resize;
+}
+.data-resizer-holder-left-top {
+    left: -6px;
+    top: -6px;
+    cursor: nwse-resize;
+}
+
+.data-resizer-number {
+    position: absolute;
+    display: inline-block;
+    line-height: 24px;
+    padding: 0 4px;
+    font-size: 12px;
+    border-radius: 3px 3px;
+    background: rgba(0, 0, 0, 0.86);
+    color: rgba(255, 255, 255, 0.96);
+    font-family: 'Lucida Console', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out;
+    transform: scale(0.8);
+}
+
+.data-resizer-number-right-top {
+    top: 0px;
+    right: -6px;
+    transform: translateX(100%) scale(0.8);
+}
+
+.data-resizer-number-right-bottom {
+    right: -6px;
+    bottom: 0px;
+    transform: translateX(100%) scale(0.8);
+}
+
+.data-resizer-number-left-bottom {
+    left: -6px;
+    bottom: 0px;
+    transform: translateX(-100%) scale(0.8);
+}
+
+.data-resizer-number-left-top {
+    left: -6px;
+    top: 0px;
+    transform: translateX(-100%) scale(0.8);
+}
+
+.data-resizer-number-active {
+    opacity: 1;
+    visibility: visible;
+}

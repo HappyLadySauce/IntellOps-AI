@@ -1,0 +1,47 @@
+#应用信息
+app:
+     #版本号
+     version: 1.0.0
+     #名称
+     title: 
+     #描述
+     des: 
+     #标识包目录名
+     name: 
+     #安装状态
+     isinstall: false
+     #安装是否为覆盖原来代码
+     installcover: false
+#安装前端代码
+installvue:
+     #安装views文件B端
+     viewsfilesbusiness: 
+     #安装views文件夹B端
+     viewsfoldersbusiness: 
+     #安装组件文件B端
+     componentfilesbusiness: 
+     #安装组件文件B端
+     componentfoldersbusiness: 
+     #安装views文件A端
+     viewsfilesadmin: 
+     #安装views文件夹A端
+     viewsfoldersadmin: 
+     #安装组件文件A端
+     componentfilesadmin: 
+     #安装组件文件A端
+     componentfoldersadmin: 
+#后端代码
+installgo:
+     #安装app下代码文件夹（多个,分开）
+     appfolders: 
+     #安装utils工具类代码文件
+     utilsfiles: 
+     #合法性验证-目录取消验证
+     noVerifyAPIRoot: 
+sqldb:
+     #数据库表名称（多个,分开）
+     packtables: 
+     #b端菜单ID
+     businessmenuids: 
+     #a端菜单ID
+     adminmenuids: 

@@ -1,0 +1,335 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  background-color: var(--color-bg-1);
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+#app {
+  height: 100vh;
+}
+h3{
+  margin: 0;
+  padding: 0;
+}
+.echarts-tooltip-diy {
+  background: linear-gradient(
+    304.17deg,
+    rgba(253, 254, 255, 0.6) -6.04%,
+    rgba(244, 247, 252, 0.6) 85.2%
+  ) !important;
+  border: none !important;
+  backdrop-filter: blur(10px) !important;
+  /* Note: backdrop-filter has minimal browser support */
+
+  border-radius: 6px !important;
+  .content-panel {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 9px;
+    background: rgba(255, 255, 255, 0.8);
+    width: 164px;
+    height: 32px;
+    line-height: 32px;
+    box-shadow: 6px 0px 20px rgba(34, 87, 188, 0.1);
+    border-radius: 4px;
+    margin-bottom: 4px;
+  }
+  .tooltip-title {
+    margin: 0 0 10px 0;
+  }
+  p {
+    margin: 0;
+  }
+  .tooltip-title,
+  .tooltip-value {
+    font-size: 13px;
+    line-height: 15px;
+    display: flex;
+    align-items: center;
+    text-align: right;
+    color: #1d2129;
+    font-weight: bold;
+  }
+  .tooltip-item-icon {
+    display: inline-block;
+    margin-right: 8px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+}
+
+.general-card {
+  border-radius: 4px !important;
+  border: none !important;
+  & > .arco-card-header {
+    height: auto;
+    padding: 20px;
+    border: none;
+  }
+  .arco-card-body {
+    padding: 0 20px 20px 20px;
+  }
+}
+
+.split-line {
+  border-color: rgb(var(--gray-2));
+}
+
+.arco-table-cell {
+  .circle {
+    display: inline-block;
+    margin-right: 4px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: rgb(var(--blue-6));
+    &.pass {
+      background-color: rgb(var(--green-6));
+    }
+  }
+}
+//页面布局
+.container{
+  height: 100%;
+  padding: 14px;
+  overflow-y: auto;
+  &:has(.flex-page){
+    display: flex;
+    flex-direction: column;
+  }
+}
+ //页面导航目录
+ .Breadbox{
+  display: flex;
+  .right{
+    flex:1;
+    padding-bottom: 14px;
+    align-items: center;
+    display: flex;
+  }
+}
+//flex布局
+.flex{
+  display: flex;
+}
+.flex-between{
+  justify-content: space-between;
+}
+.flex-middle{
+  align-items:center;
+}
+.flex-column{
+  flex-direction: column;
+}
+ //垂直排列
+.flex-flow{
+  flex-flow: column;
+}
+.flex-center{
+  justify-content: center;
+}
+.flex-all-center{
+  display: flex;
+  align-items:center;
+  justify-content:center;
+}
+//铺满容器垂直分布
+.flexcolumn{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+//换行
+.flex-wrap{
+  flex-wrap: wrap;
+}
+//上传图片
+.upimagebox{
+  display: flex;
+ .imagebtn{
+   position: relative;
+   width: 160px;
+   height: 90px;
+   background-color: var(--color-neutral-1);
+   border-radius: 4px;
+   overflow: hidden;
+   -ms-flex-negative: 0;
+   flex-shrink: 0;
+   //预览
+   .upload-show-picture{
+     position: relative;
+     box-sizing: border-box;
+     width: 100%;
+     height: 100%;
+     overflow: hidden;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     img{
+       height: 100%;
+     }
+     &:hover{
+       .upload-show-picture-mask{
+          opacity: 1;
+       }
+     }
+     .upload-show-picture-mask{
+         position: absolute;
+         top: 0;
+         right: 0;
+         bottom: 0;
+         left: 0;
+         color: var(--color-white);
+         font-size: 16px;
+         line-height: 90px;
+         text-align: center;
+         background: rgba(0, 0, 0, 0.5);
+         opacity: 0;
+         transition: opacity 0.1s cubic-bezier(0, 0, 1, 1);
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         .btnline{
+           flex:1;
+           cursor: pointer;
+           height: 100%;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+         }
+         .linrone{
+           border-right: var(--color-neutral-6) solid 1px;
+         }
+         
+     }
+   }
+   .upload-picture-card{
+     width: 100%;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     user-select: none;
+     cursor: pointer;
+     .upload-picture-card-text{
+        text-align: center;
+        color:  var(--color-neutral-5);
+     }
+   }
+ }
+}
+ //多行文字
+ .detail{
+   position: relative;
+   .overflowline {
+     display: -webkit-box;
+     -webkit-box-orient: vertical;
+     -webkit-line-clamp: 2;
+     overflow: hidden;
+   }
+   a{
+     color: #1890ff;
+     text-decoration: none;
+     user-select: none;
+     cursor: pointer;
+   }
+   .btn{
+     position: absolute;
+     bottom: -20px;
+     right: 0px;
+   }
+ }
+ //index首页
+ .search-row{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 8px;
+  .search-field{
+    height: 32px;
+    .search-line{
+      width: 100%;
+    }
+    .searchdowncss{
+      position: relative;
+      .search-drown-box{
+        position: absolute;
+        top: 0;
+        left: -10px;
+        z-index: 9;
+        background-color: var(--color-bg-1);
+        box-shadow: -5px 5px 10px -4px var(--color-neutral-6);
+        border-radius: var(--border-radius-medium);
+        padding-left: 10px;
+      }
+    }
+  }
+  .search-option{
+     padding-left: 8px;
+     overflow-x: auto;
+  }
+  &.unhasesearchbtn{
+    .search-btn{
+      padding-left: 5px;
+      flex:1;
+    }
+  }
+  &.hasesearchbtn{
+    .search-field{
+      flex:1;
+    }
+  }
+ }
+ //列表按钮
+ .iconbtnc{
+  user-select: none;
+  cursor: pointer;
+}
+.iconbtn{
+  user-select: none;
+  cursor: pointer;
+  opacity: .8;
+  &:hover{
+    opacity: 1;
+  }
+}
+//可以点及按钮
+.btncs{
+  cursor: pointer;
+  user-select: none;
+  &:hover{
+    color: rgb(var(--arcoblue-5));
+  }
+}
+.abtn{
+  cursor: pointer;
+  user-select: none;
+  color: rgb(var(--arcoblue-5));
+  &:hover{
+    font-weight: 600;
+    color: rgb(var(--arcoblue-6));
+  }
+}
+.abtn-red{
+  cursor: pointer;
+  user-select: none;
+  color: rgb(var(--red-5));
+  &:hover{
+    font-weight: 600;
+    color: rgb(var(--red-6));
+  }
+}
+//不可选中文本
+.unselect{
+  user-select: none;
+}

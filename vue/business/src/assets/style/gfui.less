@@ -1,0 +1,218 @@
+.primary {
+  color: rgb(var(--primary-6));
+  margin-right: 4px;
+}
+.success {
+  color: rgb(var(--success-6));
+  margin-right: 4px;
+}
+.warning {
+  color: rgb(var(--warning-6));
+  margin-right: 4px;
+}
+.danger {
+  color: rgb(var(--danger-6));
+  margin-right: 4px;
+}
+.default{
+  color: var(--color-neutral-6);
+  margin-right: 4px;
+}
+.fontsizemin{
+ font-size: 12px;
+}
+  //边框按钮
+.gf_hover_btn-border {
+    background-color: transparent !important;
+    border: 1px solid var(--color-border-2) !important;
+    border-radius: 4px;
+    &:hover {
+      background: var(--color-secondary-hover) !important;
+    }
+    &:active {
+      background: var(--color-secondary-active) !important;
+    }
+  }
+  .gf-table--fullscreen{
+    position: fixed !important;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1001;
+    overflow-y: auto;
+  }
+  //登录页
+  .w-full {
+    width: 100%;
+  }
+  //按钮
+  .gf_hover_btn{
+    border: 0 !important;
+    background-color: transparent !important;
+    border-radius: 3px;
+    &:hover {
+      background: var(--color-secondary-hover) !important;
+    }
+  
+    &:active {
+      background: var(--color-secondary-active) !important;
+    }
+  }
+  
+  // 渐变卡片
+  .gradient-card {
+    border-radius: 8px;
+    border: 1px solid var(--color-neutral-3);
+    & > .arco-card-header {
+      border: none;
+      background: linear-gradient(180deg, rgb(var(--primary-1),0.5), hsla(0, 0%, 100%, 0));
+    }
+    .item {
+      align-items: center;
+      display: flex;
+      margin-bottom: 20px;
+      .icon-wrapper {
+        align-items: center;
+        background: var(--color-neutral-2);
+        border-radius: 50%;
+        display: flex;
+        height: 48px;
+        justify-content: center;
+        width: 48px;
+      }
+      .info {
+        flex: 1 1;
+        margin: 0 16px;
+        &-top {
+          margin-bottom: 4px;
+          .label {
+            font-weight: 500;
+            line-height: 22px;
+            margin-right: 12px;
+          }
+          .bind {
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 20px;
+          }
+        }
+        &-desc {
+          color: #86909c;
+          font-size: 12px;
+          font-weight: 400;
+          line-height: 20px;
+          .value {
+            color: #4e5969;
+          }
+        }
+      }
+      .btn-wrapper {
+        align-self: flex-start;
+        .btn {
+          height: 28px;
+          width: 56px;
+          &:hover {
+            -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, .15);
+            box-shadow: 0 2px 3px rgba(0, 0, 0, .15);
+            border-color: rgb(var(--primary-5));
+          }
+        }
+      }
+    }
+  
+    .detail {
+      display: flex;
+      font-size: 12px;
+      justify-content: flex-start;
+      margin: -5px 0 0 64px;
+      .sub-text-wrapper {
+        width: 100%;
+        border-left: 2px solid var(--color-fill-4);
+        padding-left: 12px;
+        .sub-text {
+          color: #4e5969;
+          font-weight: 400;
+          line-height: 20px;
+          margin-bottom: 8px;
+          &-value {
+            background: var(--color-neutral-2);
+            padding: 1px 5px;
+            margin: 0 5px;
+            border-radius: 3px;
+          }
+        }
+        .arco-link.link {
+          font-size: 12px;
+          padding: 0;
+        }
+      }
+    }
+  }
+  //不换行超出隐藏...
+  .nowraphind{
+    width:100%;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  //分割线间隔
+  .divider-margin{
+    margin: 0 8px;
+    vertical-align: unset;
+  }
+  .cell_round{
+    border-radius: 100px;
+  }
+  //表头搜索栏
+  .table-toolbar{
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    overflow-x: auto;
+    scrollbar-width:none;
+    .left{
+      flex:1;
+    }
+    .right{
+      padding-left: 8px;
+    }
+  }
+  .custom-full-table{
+    &:hover{
+      .table-toolbar{
+        scrollbar-width:auto;
+      }
+    }
+  }
+  .contentbox{
+    ::-webkit-scrollbar {
+      height: 7px;
+      user-select: none;
+    }
+    &:hover{
+      .table-toolbar{
+        scrollbar-width:auto;
+      }
+    }
+  }
+
+  // 通用描述
+.general-description {
+  position: relative;
+  .arco-descriptions-title {
+    padding-left: 10px;
+  }
+  .arco-descriptions-title::before {
+    content: '';
+    width: 4px;
+    height: 22px;
+    position: absolute;
+    left: 0;
+    background-color: rgb(var(--primary-5));
+    border-radius: 0 4px 4px 0;
+  }
+}
+//排版去掉底部距离
+div.arco-typography {
+  margin-bottom: 0 !important;
+}

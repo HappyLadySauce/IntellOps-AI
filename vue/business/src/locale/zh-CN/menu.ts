@@ -1,0 +1,42 @@
+export default {
+  'menu.home': '首页概况',
+  'menu.server.dashboard': '仪表盘-服务端',
+  'menu.server.workplace': '工作台-服务端',
+  'menu.server.monitor': '实时监控-服务端',
+  'menu.list': '列表页',
+  'menu.result': '结果页',
+  'menu.exception': '异常页',
+  'menu.form': '表单页',
+  'menu.profile': '详情页',
+  'menu.visualization': '数据可视化',
+  'menu.user': '个人中心',
+  'menu.arcoWebsite': 'Arco Design',
+  'menu.faq': '常见问题',
+  'menu.system':"系统管理",
+
+  // columns
+  'searchTable.columns.index': '#',
+  'searchTable.columns.number': '集合编号',
+  'searchTable.columns.name': '集合名称',
+  'searchTable.columns.contentType': '内容体裁',
+  'searchTable.columns.filterType': '筛选方式',
+  'searchTable.columns.count': '内容量',
+  'searchTable.columns.createdTime': '创建时间',
+  'searchTable.columns.status': '状态',
+  'searchTable.columns.operations': '操作',
+  'searchTable.columns.operations.view': '查看',
+
+  // size
+  'searchTable.size.mini': '迷你',
+  'searchTable.size.small': '偏小',
+  'searchTable.size.medium': '中等',
+  'searchTable.size.large': '偏大',
+  // actions
+  'searchTable.actions.export': '导出',
+  'searchTable.actions.import': '导入',
+  'searchTable.actions.refresh': '刷新',
+  'searchTable.actions.density': '密度',
+  'searchTable.actions.columnSetting': '列设置',
+  'searchTable.actions.fullscreen': '全屏',
+  'searchTable.actions.exit': '退出',
+};

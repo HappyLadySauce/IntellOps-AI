@@ -1,0 +1,33 @@
+package packageName
+
+import (
+	"gofly/utils/gf"
+)
+
+// 后端代码模版
+type Replace struct{ NoNeedAuths []string }
+
+func init() {
+	fpath := Replace{NoNeedAuths: []string{"*"}}
+	gf.Register(&fpath, fpath)
+}
+
+// get请求
+func (api *Replace) GetList(c *gf.GinCtx) {
+	gf.Success().SetMsg("get请求测试").Regin(c)
+}
+
+// Post请求
+func (api *Replace) Save(c *gf.GinCtx) {
+	gf.Success().SetMsg("Post请求测试").Regin(c)
+}
+
+// Put请求
+func (api *Replace) PutStatus(c *gf.GinCtx) {
+	gf.Success().SetMsg("Put请求测试").Regin(c)
+}
+
+// delete请求
+func (api *Replace) Del(c *gf.GinCtx) {
+	gf.Success().SetMsg("delete请求测试").Regin(c)
+}

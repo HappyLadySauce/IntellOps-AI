@@ -1,0 +1,123 @@
+package codemarke
+
+import (
+	"gofly/utils/gf"
+	"gofly/utils/tools/gconv"
+	"gofly/utils/tools/gmap"
+	"gofly/utils/tools/gvar"
+	"strings"
+)
+
+// api接口模版
+type Replace struct{ NoNeedAuths []string }
+
+func init() {
+	fpath := Replace{NoNeedAuths: []string{"*"}}
+	gf.Register(&fpath, fpath)
+}
+
+// 获取列表
+func (api *Replace) getList(c *gf.GinCtx) {
+	pageSize := gconv.Int(c.DefaultQuery("pageSize", "10"))
+	// 搜索添条件
+	param, _ := gf.RequestParam(c)
+	whereMap := gmap.New()
+	businessID := c.GetInt64("businessID") //当前商户ID
+	if gf.DbHaseField("{tablename}", "business_id") && businessID > 0 {
+		whereMap.Set("business_id", businessID)
+	}
+	if name, ok := param["name"]; ok && name != "" {
+		whereMap.Set("name like ?", "%"+gconv.String(name)+"%")
+	}
+	if title, ok := param["title"]; ok && title != "" {
+		whereMap.Set("title like ?", "%"+gconv.String(title)+"%")
+	}
+	if status, ok := param["status"]; ok && status != "" {
+		whereMap.Set("status", status)
+	}
+	if lastid, ok := param["lastid"]; ok && lastid != "" {
+		whereMap.Set("lastid <", lastid)
+	}
+	MDB := gf.Model("{tablename}").Where(whereMap)
+	totalCount, _ := MDB.Clone().Count()
+	list, err := MDB.Limit(pageSize).Order("id desc").Select()
+	if err != nil {
+		gf.Failed().SetMsg(err.Error()).Regin(c)
+	} else {
+		var new_lastid interface{}
+		rooturl := gf.GetMainURL()
+		for key, val := range list {
+			if _, ok := val["image"]; ok && !strings.Contains(val["image"].String(), "http")  {
+				val["image"] = gvar.New(rooturl + val["image"].String())
+			}
+			if (key + 1) == len(list) {
+				new_lastid = val["id"]
+			}
+		}
+		gf.Success().SetMsg("获取全部列表").SetData(gf.Map{
+			"lastid":   new_lastid,
+			"pageSize": pageSize,
+			"total":    totalCount,
+			"items":    list}).Regin(c)
+	}
+}
+
+// 获取详情
+func (api *Replace) getDetail(c *gf.GinCtx) {
+	id := c.DefaultQuery("id", "")
+	if id == "" {
+		gf.Failed().SetMsg("请传参数id").Regin(c)
+	} else {
+		data, err := gf.Model("{tablename}").Where("id", id).
+			Fields("{fields}").Find()
+		if err != nil {
+			gf.Failed().SetMsg("获取详情失败").SetData(err).Regin(c)
+		} else {
+			if data != nil {
+				rooturl := gf.GetMainURL()
+				if _, ok := data["image"]; ok && !strings.Contains(data["image"].String(), "http") {
+					data["image"] = gvar.New(rooturl + data["image"].String())
+				}
+			}
+			gf.Success().SetMsg("获取详情成功！").SetData(data).Regin(c)
+		}
+	}
+}
+
+// 保存
+func (api *Replace) save(c *gf.GinCtx) {
+	param, _ := gf.RequestParam(c)
+	var f_id = gf.GetEditId(param["id"])
+	if f_id == 0 {
+		if gf.DbHaseField("{tablename}", "business_id") {
+			param["business_id"] = c.GetInt64("businessID") //当前用户商户ID
+		}
+		addId, err := gf.Model("{tablename}").Data(param).InsertAndGetId()
+		if err != nil {
+			gf.Failed().SetMsg("添加失败").SetData(err).Regin(c)
+		} else {
+			if addId != 0 {
+				gf.Model("{tablename}").Data(gf.Map{"weigh": addId}).Where("id", addId).Update()
+			}
+			gf.Success().SetMsg("添加成功！").SetData(addId).Regin(c)
+		}
+	} else {
+		res, err := gf.Model("{tablename}").Data(param).Where("id", f_id).Update()
+		if err != nil {
+			gf.Failed().SetMsg("更新失败").SetData(err).Regin(c)
+		} else {
+			gf.Success().SetMsg("更新成功！").SetData(res).Regin(c)
+		}
+	}
+}
+
+// 删除
+func (api *Replace) del(c *gf.GinCtx) {
+	param, _ := gf.RequestParam(c)
+	res, err := gf.Model("{tablename}").WhereIn("id", param["ids"]).Delete()
+	if err != nil {
+		gf.Failed().SetMsg("删除失败").SetData(err).Regin(c)
+	} else {
+		gf.Success().SetMsg("删除成功！").SetData(res).Regin(c)
+	}
+}
