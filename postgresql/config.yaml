@@ -1,0 +1,6 @@
+postgresql:
+  host: 127.0.0.1
+  database: gofly_bs
+  user: postgres
+  password: gofly
+  port: 5432

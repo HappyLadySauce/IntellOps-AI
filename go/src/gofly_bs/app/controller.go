@@ -10,7 +10,6 @@ package controller
 * 有控制的模块请在RouterHandler添加模块的路由钩子
  */
 import (
-	"gofly/app/admin"
 	"gofly/app/business"
 	_ "gofly/app/common"
 	"gofly/utils/gf"
@@ -19,5 +18,4 @@ import (
 // 路由中间件/路由钩子-需要拦截的模块再添加，如admin和business需要权限则添加，common不需要我们就加
 func RouterHandler(c *gf.GinCtx) {
 	business.RouterHandler(c, "business")
-	admin.RouterHandler(c, "admin")
 }
